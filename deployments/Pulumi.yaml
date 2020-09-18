@@ -1,0 +1,5 @@
+name: streamlit-preview-environments-demo
+runtime: nodejs
+description: Demonstrating dynamic throwaway environments
+backend:
+  url: s3://abatilo/infra/cloud/
