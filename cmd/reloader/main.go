@@ -51,7 +51,7 @@ func main() {
 	log.Info("Cloning to " + cloneDir)
 	repo, err := git.PlainClone(cloneDir, false, &git.CloneOptions{
 		Progress:      log,
-		URL:           cfg.Directory,
+		URL:           cfg.Repo,
 		ReferenceName: branchName,
 	})
 	if err != nil {
@@ -82,24 +82,17 @@ func main() {
 		}
 	})
 
-	srv := &http.Server{
-		Addr:    ":8080",
-		Handler: r,
-	}
-
-	// Run streamlit command
-	installCmd := exec.Command("poetry", "install")
-	installCmd.Dir = cfg.Directory
-	installCmd.Stdout = log
-	installCmd.Stderr = log
-	installCmd.Run()
-
-	streamlitCmd := exec.Command("poetry", "run", "streamlit", "run", "--server.runOnSave", "true", "main.py")
+	streamlitCmd := exec.Command("streamlit", "run", "--server.address", "0.0.0.0", "--server.runOnSave", "true", "main.py")
 	streamlitCmd.Dir = cfg.Directory
 	streamlitCmd.Stdout = log
 	streamlitCmd.Stderr = log
 	go streamlitCmd.Run()
 
 	log.Info("Listening...")
+
+	srv := &http.Server{
+		Addr:    ":8080",
+		Handler: r,
+	}
 	srv.ListenAndServe()
 }
