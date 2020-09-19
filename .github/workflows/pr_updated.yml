@@ -1,0 +1,13 @@
+name: Pull Request Updated
+on:
+  pull_request:
+    types:
+      - synchronize
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update environment
+        run: |
+          curl -X POST https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/pull
