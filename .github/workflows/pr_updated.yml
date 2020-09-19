@@ -5,7 +5,7 @@ on:
       - synchronize
 
 jobs:
-  update:
+  updated:
     runs-on: ubuntu-latest
     steps:
       - name: Update environment
