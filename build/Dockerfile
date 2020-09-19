@@ -13,7 +13,5 @@ FROM python:3.8.5
 WORKDIR /github.com/abatilo/streamlit-preview-environments-demo
 RUN pip install streamlit==0.67.0
 
-COPY streamlit-application ./streamlit-application
-
 COPY --from=reloader /go/bin/reloader /usr/local/bin/reloader
 ENTRYPOINT ["reloader"]

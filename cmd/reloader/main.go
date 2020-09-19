@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"path"
 
 	"github.com/abatilo/streamlit-preview-environments-demo/internal/logger"
 	"github.com/go-git/go-git/v5"
@@ -87,7 +88,7 @@ func main() {
 	})
 
 	streamlitCmd := exec.Command("streamlit", "run", "--server.address", "0.0.0.0", "--server.runOnSave", "true", "main.py")
-	streamlitCmd.Dir = cfg.Directory
+	streamlitCmd.Dir = path.Join(cloneDir, cfg.Directory)
 	streamlitCmd.Stdout = log
 	streamlitCmd.Stderr = log
 	go streamlitCmd.Run()
