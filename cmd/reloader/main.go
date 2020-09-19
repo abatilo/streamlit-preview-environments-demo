@@ -60,6 +60,9 @@ func main() {
 	}
 
 	r := http.NewServeMux()
+	r.HandleFunc("/ping", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "pong")
+	})
 	r.HandleFunc("/pull", func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodGet {
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
