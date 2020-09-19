@@ -3,7 +3,7 @@ FROM golang:1.15-alpine as reloader
 WORKDIR /github.com/abatilo/streamlit-preview-environments-demo
 COPY go.mod go.sum ./
 RUN go mod download -x
-RUN go get github.com/monzo/envoy-preflight
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go get github.com/monzo/envoy-preflight
 
 COPY cmd ./cmd
 COPY internal ./internal
