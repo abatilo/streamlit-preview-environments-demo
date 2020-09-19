@@ -1,8 +1,7 @@
-pulumi 2.10.1
-nodejs 14.1.0
+golang 1.15
 helm 3.2.1
 kubectl 1.17.3
-istioctl 1.6.0
-golang 1.15
-python 3.8.5
+nodejs 14.1.0
 poetry 1.0.9
+pulumi 2.10.1
+python 3.8.5

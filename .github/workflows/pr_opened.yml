@@ -1,20 +1,29 @@
 name: Pull Request Opened
 on:
   pull_request:
-    types:
-      - opened
+    # types:
+    #   - opened
 
 jobs:
   opened:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: "Filter out unneeded dependencies"
+        run: |
+          cat .tool-versions | grep -vE "golang|nodejs|poetry|pulumi|python" .filtered
+          mv .filtered .tool-versions
       - uses: asdf-vm/actions/install@v1
         env:
           NODEJS_CHECK_SIGNATURES: "no"
       - name: Deploy preview environment
         env:
           REF: ${{ github.ref }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
+          # Get EKS credentials
+          aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER }}
+
           BRANCH="${REF##*/}" # Keep only branch name
           helm -n streamlit-preview upgrade --install "streamlit-preview-${BRANCH}" deployments/chart --set branch="${BRANCH}"
