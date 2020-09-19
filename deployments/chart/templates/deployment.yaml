@@ -23,6 +23,8 @@ spec:
           image: "ghcr.io/abatilo/streamlit-reloader:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: Always
           env:
+            - name: ENVOY_ADMIN_API
+              value: http://localhost:15000
             - name: RELOADER_REPO
               value: {{ .Values.repo }}
             - name: RELOADER_BRANCH
