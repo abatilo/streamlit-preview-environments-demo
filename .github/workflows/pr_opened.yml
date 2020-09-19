@@ -30,4 +30,7 @@ jobs:
           BRANCH="${REF##*/}" # Keep only branch name
           echo ${BRANCH}
 
+          echo "${{ github.base_ref }}"
+          echo "${{ github.head_ref }}"
+
           # helm -n streamlit-preview upgrade --install "streamlit-preview-${BRANCH}" deployments/chart --set branch="${BRANCH}"
