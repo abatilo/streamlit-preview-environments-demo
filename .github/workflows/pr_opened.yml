@@ -25,6 +25,9 @@ jobs:
         run: |
           # Get EKS credentials
           aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER }}
+          echo ${REF}
 
           BRANCH="${REF##*/}" # Keep only branch name
-          helm -n streamlit-preview upgrade --install "streamlit-preview-${BRANCH}" deployments/chart --set branch="${BRANCH}"
+          echo ${BRANCH}
+
+          # helm -n streamlit-preview upgrade --install "streamlit-preview-${BRANCH}" deployments/chart --set branch="${BRANCH}"
