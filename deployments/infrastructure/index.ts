@@ -29,6 +29,7 @@ const gateway = new k8s.apiextensions.CustomResource(
     kind: "Gateway",
     metadata: {
       namespace: appName,
+      name: appName,
     },
     spec: {
       selector: {

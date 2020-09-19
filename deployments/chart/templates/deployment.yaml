@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+    app: reloader
+    version: v1
+spec:
+  selector:
+    matchLabels:
+      {{- include "chart.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "chart.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "ghcr.io/abatilo/streamlit-reloader:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: RELOADER_REPO
+              value: {{ .Values.repo }}
+            - name: RELOADER_BRANCH
+              value: {{ .Values.branch }}
+            - name: RELOADER_DIRECTORY
+              value: {{ .Values.directory }}
+          ports:
+            - name: http
+              containerPort: 8501
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 500m
+              memory: 512Mi

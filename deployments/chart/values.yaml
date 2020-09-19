@@ -1,0 +1,8 @@
+replicaCount: 2
+
+image:
+  tag: "latest"
+
+repo: https://www.github.com/abatilo/streamlit-preview-environments-demo.git
+branch: master
+directory: streamlit-application
