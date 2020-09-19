@@ -20,5 +20,3 @@ Still need:
   that will be sent via a GitHub Action and then the webapp will pull the
   branch. Environment reloader will run the streamlit cmd in the background
 - Need the GitHub Actions that will provision and deploy the virtual service which fronts the reloader for a given PR/branch
-
-Some change
