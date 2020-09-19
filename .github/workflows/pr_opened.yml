@@ -37,12 +37,12 @@ jobs:
             console.log(comments);
 
             if (comments.some(c => c.body == body)) {
+              console.log('Duplicate found, no comment will be made');
+            } else {
               github.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 body
               })
-            } else {
-              console.log('Duplicate found, no comment will be made');
             }
