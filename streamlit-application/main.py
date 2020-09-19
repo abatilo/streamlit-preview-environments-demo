@@ -1,4 +1,10 @@
 import streamlit as st
 
-x = st.text_input('What is your name?')
-st.write('Your name reversed is', x[::-1])
+starting_point = st.text_input('How much money are you starting with?', value='1000')
+interest = st.slider('What is your interest rate percentage?', min_value=1, max_value=20, value=9)
+years = st.slider('How many years are you waiting?', min_value=1, value=30)
+
+def compound(P, r, t):
+  return f'{(int(P) * (1 + (float(r) / 100.0)) ** float(t)):,.2f}'
+
+st.write('If you start with $', starting_point, 'and you wait', years, 'years, you\'ll have $', compound(starting_point, interest, years))
