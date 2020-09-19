@@ -10,4 +10,4 @@ jobs:
     steps:
       - name: Update environment
         run: |
-          curl -X POST https://${{ github.head_ref }}.streamlit.aaronbatilo.dev
+          curl -X POST https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/pull
