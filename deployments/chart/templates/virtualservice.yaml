@@ -12,7 +12,15 @@ spec:
   http:
     - match:
         - uri:
-            prefix: /
+            prefix: /ping
+        - uri:
+            prefix: /pull
       route:
         - destination:
             host: {{ include "chart.fullname" . }}
+    - match:
+        - uri:
+            prefix: /
+      route:
+        - destination:
+            host: {{ include "chart.fullname" . }}-streamlit

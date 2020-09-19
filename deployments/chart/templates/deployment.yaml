@@ -15,6 +15,8 @@ spec:
     metadata:
       labels:
         {{- include "chart.selectorLabels" . | nindent 8 }}
+        app: reloader
+        version: v1
     spec:
       containers:
         - name: {{ .Chart.Name }}
@@ -29,6 +31,9 @@ spec:
               value: {{ .Values.directory }}
           ports:
             - name: http
+              containerPort: 8080
+              protocol: TCP
+            - name: streamlit
               containerPort: 8501
               protocol: TCP
           resources:
@@ -38,3 +43,7 @@ spec:
             requests:
               cpu: 500m
               memory: 512Mi
+          readinessProbe:
+            httpGet:
+              path: /ping
+              port: http

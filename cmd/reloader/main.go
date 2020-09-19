@@ -69,6 +69,7 @@ func main() {
 			return
 		}
 
+		log.Info("Reloading files...")
 		tree, err := repo.Worktree()
 		if err != nil {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
@@ -79,7 +80,7 @@ func main() {
 			Progress:      log,
 			ReferenceName: branchName,
 		})
-		if err != nil {
+		if err != git.NoErrAlreadyUpToDate {
 			http.Error(w, err.Error(), http.StatusInternalServerError)
 			return
 		}
