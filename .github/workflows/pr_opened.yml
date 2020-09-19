@@ -18,19 +18,11 @@ jobs:
           NODEJS_CHECK_SIGNATURES: "no"
       - name: Deploy preview environment
         env:
-          REF: ${{ github.ref }}
+          BRANCH: ${{ github.head_ref }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: us-west-2
         run: |
           # Get EKS credentials
           aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER }}
-          echo ${REF}
-
-          BRANCH="${REF##*/}" # Keep only branch name
-          echo ${BRANCH}
-
-          echo "${{ github.base_ref }}"
-          echo "${{ github.head_ref }}"
-
-          # helm -n streamlit-preview upgrade --install "streamlit-preview-${BRANCH}" deployments/chart --set branch="${BRANCH}"
+          helm -n streamlit-preview upgrade --install "${BRANCH}" deployments/chart --set branch="${BRANCH}"
