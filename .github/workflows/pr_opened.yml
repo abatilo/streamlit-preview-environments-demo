@@ -26,3 +26,12 @@ jobs:
           # Get EKS credentials
           aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER }}
           helm -n streamlit-preview upgrade --install "${BRANCH}" deployments/chart --set branch="${BRANCH}"
+      - name: Comment PR URL
+        uses: unsplash/comment-on-pr@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: ${{ github.head_ref }}
+        with:
+          check_for_duplicate_msg: true
+          msg: |
+            View your PR in action by going to https://${BRANCH}.streamlit.aaronbatilo.dev
