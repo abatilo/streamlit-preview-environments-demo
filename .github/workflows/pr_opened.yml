@@ -34,4 +34,4 @@ jobs:
         with:
           check_for_duplicate_msg: true
           msg: |
-            View your PR in action by going to https://${BRANCH}.streamlit.aaronbatilo.dev
+            View your PR in action by going to [https://${{ github.head_ref }}.streamlit.aaronbatilo.dev](https://${{ github.head_ref }}.streamlit.aaronbatilo.dev)
