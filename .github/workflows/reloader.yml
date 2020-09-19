@@ -40,3 +40,5 @@ jobs:
           cache-to: type=local,dest=/tmp/.buildx-cache
           context: .
           file: ./build/Dockerfile
+          labels: |
+            org.opencontainers.image.source https://github.com/abatilo/streamlit-preview-environments-demo
