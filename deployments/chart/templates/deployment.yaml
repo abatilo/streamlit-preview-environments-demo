@@ -19,7 +19,7 @@ spec:
       containers:
         - name: {{ .Chart.Name }}
           image: "ghcr.io/abatilo/streamlit-reloader:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: IfNotPresent
+          imagePullPolicy: Always
           env:
             - name: RELOADER_REPO
               value: {{ .Values.repo }}
