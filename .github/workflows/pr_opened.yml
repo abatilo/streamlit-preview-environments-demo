@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: "Filter out unneeded dependencies"
         run: |
-          cat .tool-versions | grep -vE "golang|nodejs|poetry|pulumi|python" .filtered
+          cat .tool-versions | grep -vE "golang|nodejs|poetry|pulumi|python" > .filtered
           mv .filtered .tool-versions
       - uses: asdf-vm/actions/install@v1
         env:
