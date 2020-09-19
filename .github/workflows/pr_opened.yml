@@ -29,7 +29,7 @@ jobs:
         with:
           script: |
             const body = 'View your PR in action by going to [https://${{ github.head_ref }}.streamlit.aaronbatilo.dev](https://${{ github.head_ref }}.streamlit.aaronbatilo.dev)';
-            const comments = await github.issues.listComments({
+            const { data: comments } = await github.issues.listComments({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo
