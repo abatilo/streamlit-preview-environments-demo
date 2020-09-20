@@ -9,7 +9,7 @@ COPY cmd ./cmd
 COPY internal ./internal
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go install -ldflags="-w -s" ./...
 
-FROM python:3.8.5
+FROM python:3.8.5-slim-buster
 
 WORKDIR /github.com/abatilo/streamlit-preview-environments-demo
 RUN pip install streamlit==0.67.0
