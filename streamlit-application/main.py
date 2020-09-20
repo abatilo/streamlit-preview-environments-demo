@@ -204,7 +204,7 @@ st.write("""
 # Aaron Batilo's interactive history
 """)
 
-year = st.slider("What year would you like to read about?", min_value=2008, max_value=2020, value=2008)
+year = st.slider("What year would you like to read about?", min_value=2008, max_value=2020, value=2020)
 
 years = {
   2008: [year2008],
