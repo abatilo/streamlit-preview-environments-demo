@@ -1,4 +1,4 @@
 import streamlit as st
 
-x = st.text_input('What is your name?')
-st.write('Your name reversed is', x[::-1])
+x = st.text_input('Enter a string')
+st.write('Your string reversed is', x[::-1])
