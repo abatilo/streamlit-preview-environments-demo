@@ -63,7 +63,10 @@ to this repo via GitHub Container Registry.
 When a pull request is made, we trigger a [GitHub
 Action](./.github/workflows/pr_opened.yml) which performs a helm installation
 of the [reloader application's chart](./deployments/chart/), configured with
-the repository URL, branch, and relative path as values for the helm release.
+the repository URL, branch, and relative path as values for the helm release. A
+link to your new environment will be added as a
+[comment](https://github.com/abatilo/streamlit-preview-environments-demo/pull/5#issuecomment-695368161)
+on your pull request.
 
 When a pull request is updated, we [send a
 webhook](./.github/workflows/pr_updated.yml) to the deployed reloader which
