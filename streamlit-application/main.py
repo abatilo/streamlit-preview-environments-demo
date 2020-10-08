@@ -1,6 +1,6 @@
 import streamlit as st
 
-starting_point = st.text_input('HELLO STEVE', value='20000')
+starting_point = st.text_input('HELLO API COUNCIL', value='20000')
 interest = st.slider('What is your interest rate percentage?', min_value=1, max_value=20, value=12)
 years = st.slider('How many years are you waiting?', min_value=1, value=45)
 
