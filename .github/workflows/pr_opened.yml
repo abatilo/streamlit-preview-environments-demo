@@ -25,6 +25,12 @@ jobs:
           # Get EKS credentials
           aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER }}
           helm -n streamlit-preview upgrade --install "${BRANCH}" deployments/chart --set branch="${BRANCH}"
+      - run: |
+          NEXT_WAIT_TIME=0
+          until [ $NEXT_WAIT_TIME -eq 5 ] || curl https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/ping; do
+            sleep 30
+            NEXT_WAIT_TIME=$(( NEXT_WAIT_TIME + 1 ))
+          done
       - uses: actions/github-script@v3
         with:
           script: |
