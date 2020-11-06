@@ -25,12 +25,17 @@ jobs:
           # Get EKS credentials
           aws eks update-kubeconfig --name ${{ secrets.EKS_CLUSTER }}
           helm -n streamlit-preview upgrade --install "${BRANCH}" deployments/chart --set branch="${BRANCH}"
-      - run: |
-          NEXT_WAIT_TIME=0
-          until [ $NEXT_WAIT_TIME -eq 5 ] || curl https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/ping; do
+      - name: Wait for environment to be deployed
+        run: |
+          ATTEMPTS=0
+          STATUS=$(curl -w '%{http_code}' -s -o /dev/null https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/)
+          until [ $ATTEMPTS -eq 10 ] || [ $STATUS -eq 200 ]; do
+            echo "Website is not ready yet, waiting..."
             sleep 30
-            NEXT_WAIT_TIME=$(( NEXT_WAIT_TIME + 1 ))
+            ATTEMPTS=$(( ATTEMPTS + 1 ))
+            STATUS=$(curl -w '%{http_code}' -s -o /dev/null https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/)
           done
+          [ $ATTEMPTS -lt 10 ]
       - uses: actions/github-script@v3
         with:
           script: |
