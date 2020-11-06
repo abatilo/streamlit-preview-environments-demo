@@ -27,12 +27,12 @@ jobs:
           helm -n streamlit-preview upgrade --install "${BRANCH}" deployments/chart --set branch="${BRANCH}"
       - run: |
           ATTEMPTS=0
-          STATUS=$(curl -w '%{http_code}' -s -o /dev/null https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/ping)
+          STATUS=$(curl -w '%{http_code}' -s -o /dev/null https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/)
           until [ $ATTEMPTS -eq 5 ] || [ $STATUS -eq 200 ]; do
             echo "Website is not ready yet, waiting..."
             sleep 30
             ATTEMPTS=$(( ATTEMPTS + 1 ))
-            STATUS=$(curl -w '%{http_code}' -s -o /dev/null https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/ping)
+            STATUS=$(curl -w '%{http_code}' -s -o /dev/null https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/)
           done
       - uses: actions/github-script@v3
         with:
