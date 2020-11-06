@@ -1,2 +1,2 @@
 import streamlit as st
-st.text('Wait until ready')
+st.text('Welcome to the streamlit based preview environments demo!')
