@@ -35,7 +35,7 @@ jobs:
             ATTEMPTS=$(( ATTEMPTS + 1 ))
             STATUS=$(curl -w '%{http_code}' -s -o /dev/null https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/)
           done
-          [ $ATTEMPTS -lt 10 ]
+          [ $ATTEMPTS -lt 100 ]
       - uses: actions/github-script@v3
         with:
           script: |
