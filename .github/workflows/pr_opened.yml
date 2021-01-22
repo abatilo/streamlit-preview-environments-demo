@@ -31,7 +31,7 @@ jobs:
           STATUS=$(curl -w '%{http_code}' -s -o /dev/null https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/)
           until [ $ATTEMPTS -eq 10 ] || [ $STATUS -eq 200 ]; do
             echo "Website is not ready yet, waiting..."
-            sleep 30
+            sleep 2
             ATTEMPTS=$(( ATTEMPTS + 1 ))
             STATUS=$(curl -w '%{http_code}' -s -o /dev/null https://${{ github.head_ref }}.streamlit.aaronbatilo.dev/)
           done
