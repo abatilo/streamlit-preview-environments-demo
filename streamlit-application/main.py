@@ -2,7 +2,8 @@ import streamlit as st
 st.text('Hello there')
 
 starting_point = st.text_input('How much are you starting with?', value='20000')
-st.write('Your string reversed is', x[::-1])	interest = st.slider('What is your interest rate percentage?', min_value=1, max_value=20, value=12)
+st.write('Your string reversed is', x[::-1])
+interest = st.slider('What is your interest rate percentage?', min_value=1, max_value=20, value=12)
 years = st.slider('How many years are you waiting?', min_value=1, value=45)
 
 def compound(P, r, t):
