@@ -1,0 +1,21 @@
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ include "chart.fullname" . }}
+  labels:
+    {{- include "chart.labels" . | nindent 4 }}
+spec:
+  entryPoints:
+    - "websecure"
+  routes:
+    - match: "Host(`{{ .Values.branch }}.streamlit.aaronbatilo.dev`) && (Path(`/ping`) || Path(`/pull`))"
+      kind: Rule
+      services:
+        - name: {{ include "chart.fullname" . }}
+          port: 80
+    - match: "Host(`{{ .Values.branch }}.streamlit.aaronbatilo.dev`)"
+      kind: Rule
+      services:
+        - name: {{ include "chart.fullname" . }}-streamlit
+          port: 80
