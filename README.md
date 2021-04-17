@@ -81,10 +81,9 @@ now you have easy and automatic development environments for developers.
 #### The backing infrastructure
 
 The `streamlit` instance itself exposes the hosted website on port `:8501`. We
-expose the reloader webhook route at `:8080`. We're using an [Istio
-VirtualService](https://github.com/abatilo/streamlit-preview-environments-demo/blob/836712b39f5123e6c4a6c36d6593c2a297ac23dd/deployments/chart/templates/virtualservice.yaml#L13-L26)
-to handle the route based mapping along with the wildcard subdomain routing for
-each environment.
+expose the reloader webhook route at `:8080`. We're using an Traefik
+IngressRoute to handle the route based mapping along with the wildcard
+subdomain routing for each environment.
 
 This is running on my own EKS cluster which has heterogenous cluster
 autoscaling via [Spot.io](https://spot.io/). So your development team could
