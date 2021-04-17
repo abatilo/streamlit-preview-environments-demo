@@ -14,37 +14,6 @@ const ns = new k8s.core.v1.Namespace(
   {
     metadata: {
       name: appName,
-      labels: {
-        "istio-injection": "enabled",
-      },
-    },
-  },
-  { provider: k8sProvider }
-);
-
-const gateway = new k8s.apiextensions.CustomResource(
-  appName,
-  {
-    apiVersion: "networking.istio.io/v1alpha3",
-    kind: "Gateway",
-    metadata: {
-      namespace: appName,
-      name: appName,
-    },
-    spec: {
-      selector: {
-        istio: "ingressgateway",
-      },
-      servers: [
-        {
-          port: {
-            number: 443,
-            name: "https",
-            protocol: "HTTP",
-          },
-          hosts: ["*.streamlit.aaronbatilo.dev"],
-        },
-      ],
     },
   },
   { provider: k8sProvider }
