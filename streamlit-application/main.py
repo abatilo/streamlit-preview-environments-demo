@@ -1,5 +1,5 @@
 import streamlit as st
-st.text('Hello World!')
+st.text('Hello World! Testing with cloudfront')
 
 starting_point = st.text_input('How much are you starting with?', value='20000')
 interest = st.slider('What is your interest rate percentage?', min_value=1, max_value=20, value=12)
